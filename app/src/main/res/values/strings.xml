@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">MyTodo</string>
+    <string name="hint_pin">Enter 4 Digit PIN</string>
+    <string name="txt_login">Login</string>
+    <string name="todo">TODO</string>
+    <string name="contentDescription">TODO</string>
+    <string name="txtAboutUs">About us</string>
+    <string name="addTodo">addTodo</string>
+    <string name="add">Add</string>
+    <string name="todoDescription">Description</string>
+    <string name="todoTitle">Title</string>
+    <string name="add_notes">Add Notes</string>
+</resources>
