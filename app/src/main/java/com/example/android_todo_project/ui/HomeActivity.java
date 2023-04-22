@@ -6,10 +6,14 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -45,7 +49,7 @@ public class HomeActivity extends AppCompatActivity {
         myDatabase.execSQL("CREATE TABLE IF NOT EXISTS Todo (id INTEGER PRIMARY KEY AUTOINCREMENT, todoTitle TEXT, todoDescription TEXT);");
 
         //Fetch Data
-        GridView gridview = (GridView) findViewById(R.id.gridView);
+        GridView gridview = findViewById(R.id.gridView);
 
         todoDataArrayList = new ArrayList<>();
         todoAdapter = new TodoAdapter(this, R.layout.layout_todo, todoDataArrayList);
@@ -64,10 +68,10 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final Dialog dialog = new Dialog(context);
                 dialog.setContentView(R.layout.dialog_add_todo);
-                ImageButton cancelBtn = (ImageButton) dialog.findViewById(R.id.btnClose);
-                Button addBtn = (Button) dialog.findViewById(R.id.btnAdd);
-                EditText etTitle = (EditText) dialog.findViewById(R.id.etTitle);
-                EditText etDescription = (EditText) dialog.findViewById(R.id.etDescription);
+                ImageButton cancelBtn = dialog.findViewById(R.id.btnClose);
+                Button addBtn = dialog.findViewById(R.id.btnAdd);
+                EditText etTitle = dialog.findViewById(R.id.etTitle);
+                EditText etDescription = dialog.findViewById(R.id.etDescription);
 
                 cancelBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -107,11 +111,26 @@ public class HomeActivity extends AppCompatActivity {
         todoAdapter.notifyDataSetChanged();
 
     }
-    public void showStatus(Context context, String title, String resultContent) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setCancelable(true);
-        builder.setTitle(title);
-        builder.setMessage(resultContent);
-        builder.show();
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        if (item.getItemId() == R.id.aboutUs) {
+            Navigation();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void Navigation() {
+        Intent i = new Intent(getApplicationContext(), AboutUsActivity.class);
+        startActivity(i);
     }
 }
