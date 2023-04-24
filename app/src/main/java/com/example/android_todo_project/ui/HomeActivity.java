@@ -32,7 +32,7 @@ import java.util.List;
 public class HomeActivity extends AppCompatActivity {
 
     final Context context = this;
-    ImageButton addTodo;
+    ImageButton addTodo, googleLoginBtn;
 
     SQLiteDatabase myDatabase;
 
@@ -44,6 +44,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         addTodo = findViewById(R.id.addTodo);
+        googleLoginBtn = findViewById(R.id.btnGoogleLogin);
 
         myDatabase = openOrCreateDatabase("MyDatabase", MODE_PRIVATE, null);
         myDatabase.execSQL("CREATE TABLE IF NOT EXISTS Todo (id INTEGER PRIMARY KEY AUTOINCREMENT, todoTitle TEXT, todoDescription TEXT);");
@@ -63,6 +64,13 @@ public class HomeActivity extends AppCompatActivity {
         gridview.setAdapter(todoAdapter);
         todoAdapter.notifyDataSetChanged();
 
+        //Google Login using Firebase
+        googleLoginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
+            }
+        });
         addTodo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
